@@ -64,11 +64,11 @@ const viewerSpace = await session.requestReferenceSpace('viewer');
 const hitTestSource = await session.requestHitTestSource({ space: viewerSpace });
 
 const loader = new THREE.GLTFLoader();
-let reticle;
-loader.load("https://immersive-web.github.io/webxr-samples/media/gltf/reticle/reticle.gltf", function(gltf) {
-  reticle = gltf.scene;
-  reticle.visible = false;
-  scene.add(reticle);
+let cave;
+loader.load("https://github.com/immersive-web/webxr-samples/blob/main/media/gltf/cave/cave.gltf", function(gltf) {
+  cave = gltf.scene;
+  cave.visible = false;
+  scene.add(cave);
 })
 
 let headset;
@@ -80,7 +80,7 @@ loader.load("./headset/headset.gltf", function(gltf) {
 session.addEventListener("select", (event) => {
   if (headset) {
     const clone = headset.clone();
-    clone.position.copy(reticle.position);
+    clone.position.copy(cave.position);
     scene.add(clone);
   }
 });
@@ -109,11 +109,11 @@ const onXRFrame = (time, frame) => {
     camera.updateMatrixWorld(true);
 
     const hitTestResults = frame.getHitTestResults(hitTestSource);
-    if (hitTestResults.length > 0 && reticle) {
+    if (hitTestResults.length > 0 && cave) {
       const hitPose = hitTestResults[0].getPose(referenceSpace);
-      reticle.visible = true;
-      reticle.position.set(hitPose.transform.position.x, hitPose.transform.position.y, hitPose.transform.position.z)
-      reticle.updateMatrixWorld(true);
+      cave.visible = true;
+      cave.position.set(hitPose.transform.position.x, hitPose.transform.position.y, hitPose.transform.position.z)
+      cave.updateMatrixWorld(true);
     }
 
     
