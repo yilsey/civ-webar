@@ -61,7 +61,7 @@ async function activateXR() {
 
   const loader = new THREE.GLTFLoader();
   let sunflower;
-  loader.load("path/to/your/sunflower.gltf", function(gltf) {
+  loader.load("https://github.com/immersive-web/webxr-samples/blob/main/media/gltf/sunflower/sunflower.gltf", function(gltf) {
     sunflower = gltf.scene;
     sunflower.visible = false;
     scene.add(sunflower);
