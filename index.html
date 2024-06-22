@@ -67,15 +67,15 @@ async function activateXR() {
     scene.add(sunflower);
   });
 
-  let headset;
-  loader.load("./headset/headset.gltf", function(gltf) {
-    headset = gltf.scene;
-    headset.scale.set(0.5, 0.5, 0.5); // Adjust the scale as needed
+  let sunflower;
+  loader.load("./sunflower/sunflower.gltf", function(gltf) {
+    sunflower = gltf.scene;
+    sunflower.scale.set(0.25, 0.25, 0.25); // Adjust the scale as needed
   });
 
   session.addEventListener("select", (event) => {
-    if (headset) {
-      const clone = headset.clone();
+    if (sunflower) {
+      const clone = sunflower.clone();
       clone.position.copy(sunflower.position);
       scene.add(clone);
     }
